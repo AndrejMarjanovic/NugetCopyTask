@@ -1,0 +1,2025 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AE16ADC9-79C7-4D3A-AFF3-267DD8086279}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GP.WebAPI</RootNamespace>
+    <AssemblyName>GP.WebAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Company>
+    </Company>
+    <IncludeTWSpecificPackages Condition="$(Company) == 'TW' OR $(Company) == 'TWDE' OR $(Company) == 'TWImport' OR $(Company) == 'TWStaging'">true</IncludeTWSpecificPackages>
+    <IncludeZZSpecificPackages Condition="$(Company) == 'ZZ'">true</IncludeZZSpecificPackages>
+    <IncludeOPSpecificPackages Condition="$(Company) == 'OP' OR $(Company) == 'ZZ'">true</IncludeOPSpecificPackages>
+    <IncludeBTSpecificPackages Condition="$(Company) == 'BT' OR $(Company) == 'ZZ'">true</IncludeBTSpecificPackages>
+    <IncludeMLSpecificPackages Condition="$(Company) == 'ML' OR $(Company) == 'ZZ' OR $(Company) == 'ZZ-ML' OR $(Company) == 'ZZUAT'">true</IncludeMLSpecificPackages>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SD.Tools.Algorithmia">
+      <HintPath>..\..\lib\SD.Tools.Algorithmia.dll</HintPath>
+    </Reference>
+    <Reference Include="SD.Tools.BCLExtensions">
+      <HintPath>..\..\lib\SD.Tools.BCLExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SD.Tools.OrmProfiler.Interceptor.EFv6.NET40">
+      <HintPath>..\..\lib\SD.Tools.OrmProfiler.Interceptor.EFv6.NET40.dll</HintPath>
+    </Reference>
+    <Reference Include="SD.Tools.OrmProfiler.Shared">
+      <HintPath>..\..\lib\SD.Tools.OrmProfiler.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BaasicWebHost.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\RedisCacheProviderConfiguration.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Controllers\Core\UtilityController.cs" />
+    <Compile Include="Controllers\Core\RootController.cs" />
+    <Compile Include="DIModule.cs" />
+    <Compile Include="Infrastructure\Application\Cache\ApplicationSettingCacheInterceptor.cs" />
+    <Compile Include="Infrastructure\Application\Membership\Models\UserInfo.cs" />
+    <Compile Include="Infrastructure\Compression\BrotliCompressor.cs" />
+    <Compile Include="Infrastructure\Compression\ServerCompressionHandler.cs" />
+    <Compile Include="Infrastructure\DefaultDIModule.cs" />
+    <Compile Include="Controllers\Dashboard\DashboardUserController.cs" />
+    <Compile Include="Controllers\Dashboard\DashboardFeedbackController.cs" />
+    <Compile Include="Infrastructure\ExceptionHandling\ExceptionHandlerGP.cs" />
+    <Compile Include="Infrastructure\ExceptionHandling\GPLog4NetLogger.cs" />
+    <Compile Include="Infrastructure\ExceptionHandling\ExceptionLoggerGP.cs" />
+    <Compile Include="Infrastructure\ExceptionHandling\SignalRErrorModule.cs" />
+    <Compile Include="Infrastructure\IModuleInfo.cs" />
+    <Compile Include="Infrastructure\Middleware\CallerEnvironmentMiddleware.cs" />
+    <Compile Include="Infrastructure\Middleware\ErrorLoggingMiddleware.cs" />
+    <Compile Include="Infrastructure\Middleware\RequestLoggerMiddleware.cs" />
+    <Compile Include="Infrastructure\ModuleInfo.cs" />
+    <Compile Include="Infrastructure\System\GPLLBLGenConnectionStringConverter.cs" />
+    <Compile Include="Infrastructure\System\GPRequestThrottlingQueue.cs" />
+    <Compile Include="Infrastructure\System\Membership\Models\DashboardOwnerInfo.cs" />
+    <Compile Include="Infrastructure\System\Membership\Models\DashboardUserInfo.cs" />
+    <Compile Include="Controllers\Dashboard\GPPlatformDashboardLoginController.cs" />
+    <Compile Include="App_Start\BaasicWebAPI.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\VirtualSection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="JSLintNet.json" />
+    <EmbeddedResource Include="Controllers\Core\LinkDiscovery.json" />
+    <Content Include="GP.WebAPI.nuspec">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <Content Include="Configuration\Local\appSettings.config" />
+    <Content Include="Configuration\Local\connectionStrings.config" />
+    <Content Include="Configuration\Local\machineKey.config" />
+    <Content Include="Configuration\Local\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'DevMonoTW'">
+    <Content Include="Configuration\DevMonoTW\appSettings.config" />
+    <Content Include="Configuration\DevMonoTW\connectionStrings.config" />
+    <Content Include="Configuration\DevMonoTW\machineKey.config" />
+    <Content Include="Configuration\DevMonoTW\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'DevMonoZZ'">
+    <Content Include="Configuration\DevMonoZZ\appSettings.config" />
+    <Content Include="Configuration\DevMonoZZ\connectionStrings.config" />
+    <Content Include="Configuration\DevMonoZZ\machineKey.config" />
+    <Content Include="Configuration\DevMonoZZ\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'QAMonoZZ'">
+    <Content Include="Configuration\QAMonoZZ\appSettings.config" />
+    <Content Include="Configuration\QAMonoZZ\connectionStrings.config" />
+    <Content Include="Configuration\QAMonoZZ\machineKey.config" />
+    <Content Include="Configuration\QAMonoZZ\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'QAMonoTW'">
+    <Content Include="Configuration\QAMonoTW\appSettings.config" />
+    <Content Include="Configuration\QAMonoTW\connectionStrings.config" />
+    <Content Include="Configuration\QAMonoTW\machineKey.config" />
+    <Content Include="Configuration\QAMonoTW\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'TestMono'">
+    <Content Include="Configuration\TestMono\appSettings.config" />
+    <Content Include="Configuration\TestMono\connectionStrings.config" />
+    <Content Include="Configuration\TestMono\machineKey.config" />
+    <Content Include="Configuration\TestMono\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'StagingMono'">
+    <Content Include="Configuration\StagingMono\appSettings.config" />
+    <Content Include="Configuration\StagingMono\connectionStrings.config" />
+    <Content Include="Configuration\StagingMono\machineKey.config" />
+    <Content Include="Configuration\StagingMono\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'QADomnet'">
+    <Content Include="Configuration\QADomnet\appSettings.config" />
+    <Content Include="Configuration\QADomnet\connectionStrings.config" />
+    <Content Include="Configuration\QADomnet\machineKey.config" />
+    <Content Include="Configuration\QADomnet\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'StagingDomnet'">
+    <Content Include="Configuration\StagingDomnet\appSettings.config" />
+    <Content Include="Configuration\StagingDomnet\connectionStrings.config" />
+    <Content Include="Configuration\StagingDomnet\machineKey.config" />
+    <Content Include="Configuration\StagingDomnet\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <Content Include="Configuration\Release\appSettings.config" />
+    <Content Include="Configuration\Release\connectionStrings.config" />
+    <Content Include="Configuration\Release\machineKey.config" />
+    <Content Include="Configuration\Release\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'UAT'">
+    <Content Include="Configuration\UAT\appSettings.config" />
+    <Content Include="Configuration\UAT\connectionStrings.config" />
+    <Content Include="Configuration\UAT\machineKey.config" />
+    <Content Include="Configuration\UAT\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'DebugDomnet'">
+    <Content Include="Configuration\DebugDomnet\appSettings.config" />
+    <Content Include="Configuration\DebugDomnet\connectionStrings.config" />
+    <Content Include="Configuration\DebugDomnet\machineKey.config" />
+    <Content Include="Configuration\DebugDomnet\smtp.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'TLTest'">
+    <Content Include="Configuration\TLTest\appSettings.config" />
+    <Content Include="Configuration\TLTest\connectionStrings.config" />
+    <Content Include="Configuration\TLTest\machineKey.config" />
+    <Content Include="Configuration\TLTest\smtp.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\DevMono.pubxml" />
+    <None Include="Properties\PublishProfiles\QADomnet.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\QAMono.pubxml" />
+    <None Include="Properties\PublishProfiles\StagingMono.pubxml" />
+    <None Include="Properties\PublishProfiles\StagingDomnet.pubxml" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.DevMonoTW.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.DevMonoZZ.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.QADomnet.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.QAMonoTW.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.QAMonoZZ.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.UAT.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.StagingDomnet.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.StagingMono.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.TestMono.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.TLTest.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\TestMono.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ApplicationData\Logs\" />
+    <Folder Include="Infrastructure\Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Baasic.Bcl.Build">
+      <Version>1.1.11</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Common.Infrastructure">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.DI">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.ErrorHandling">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.Maintenance">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.Model">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.Web">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.BCL.WebAPI">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.DAL">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.DAL.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.DataStorage">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Host.WebAPI">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Model">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Model.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Repository">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Repository.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Repository.EF.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Service">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.Service.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.WebAPI">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Core.WebAPI.Common">
+      <Version>1.1.43</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.DataTypes">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.BCL.Email">
+      <Version>1.1.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.BCL.Localization">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.BCL.MessageBus">
+      <Version>1.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.BCL.Templating">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.BCL.VFS">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.Common">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.HybridCache">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.InMemDistributed">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.Redis">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.WebAPI.Application">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Cache.WebAPI.Platform">
+      <Version>1.1.544.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.DistributedLocking">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.DistributedLocking.Common">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Email.SmtpClient">
+      <Version>1.1.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Email.SmtpClient.Common">
+      <Version>1.1.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Feedback.Common">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Feedback.Provider">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.HeartBeat">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.HeartBeat.Common">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.HeartBeat.WebHost">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Mapper">
+      <Version>1.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Mapper.Common">
+      <Version>1.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MediaVault.PreprocessingProviders.Images.ImageFactory">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.Common">
+      <Version>1.2.15</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.Hangfire">
+      <Version>1.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.Hangfire.Redis">
+      <Version>1.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.OutProc.Common">
+      <Version>1.2.15</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.RabbitMQ">
+      <Version>1.2.15</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.MessageBus.RabbitMQ.Common">
+      <Version>1.2.15</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Net.Http.Formatting">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Queue">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Queue.Common">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Queue.RabbitMQ">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Scheduler">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Scheduler.Common">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Scheduler.Redis">
+      <Version>1.2.6</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Scheduler.WebHost">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.SocialLogin">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.SocialLogin.Common">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.SQLParser">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Templating">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.Templating.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.VFS.AWSFileSystem">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Extensions.VFS.LocalFileSystem">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.BCL.Repository">
+      <Version>1.1.17.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.BCL.Repository.Common">
+      <Version>1.1.17.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.BCL.Service">
+      <Version>1.1.17.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.BCL.Service.Common">
+      <Version>1.1.17.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Common">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.DAL">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Model">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Model.Common">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Repository">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Repository.Common">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Service">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.Service.Common">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.DynamicResource.WebAPI">
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.BCL.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.BCL.Host.AWSVFS">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.BCL.Repository">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.BCL.Service">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.BCL.WebAPI">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.DAL">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.DALDBSpecific">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Model">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Model.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Platform.Service">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.PreprocessingProvider.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Repository">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Repository.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Service">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.Service.Common">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MediaVault.WebAPI">
+      <Version>1.1.11.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Common">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.DAL">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.DALDBSpecific">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Model">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Model.Common">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Platform.Repository">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Platform.Service">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Platform.WebAPI">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Repository">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Repository.Common">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Service">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.Service.Common">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageCenter.WebAPI">
+      <Version>1.1.16</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.BCL">
+      <Version>1.1.20</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Common">
+      <Version>1.1.20</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Email.Client">
+      <Version>1.1.14</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Email.Client.Common">
+      <Version>1.1.14</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Email.Common">
+      <Version>1.1.14</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Push.AWS">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Push.Client">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Extensions.Push.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.Publisher">
+      <Version>1.1.20</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.MessageServer.WindowsService.Server.Monitor">
+      <Version>1.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Adapter.BCL">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Adapter.Email.BCL">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Adapter.MS.Email">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Adapter.MS.Push">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Adapter.Push.BCL">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Common">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Compiler">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.DAL">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.DALDBSpecific">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Model">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Model.Common">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Repository">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Repository.Common">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Service">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.Service.Common">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Notifications.WebApi">
+      <Version>1.1.7</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.DAL">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.DALDBSpecific">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Model">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Model.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Repository">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Repository.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.PlatformNotifications.Service.Common">
+      <Version>1.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Common">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.DAL">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.DALDBSpecific">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Model">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Model.Common">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Repository">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Repository.Common">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Service">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.Service.Common">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Module.Templating.WebAPI">
+      <Version>1.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Common">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Core.Service.Extensions">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Core.WebAPI.Extensions">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.DAL">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.DALDBSpecific">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Model">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Model.Common">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Repository">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Repository.Common">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Service">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.Service.Common">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.WebAPI">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Platform.WebAPI.Common">
+      <Version>1.1.34</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.BackgroundTasks">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.Common">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.Devart">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.DI">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.Json">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.LLBLGen">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.Service">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Baasic.Stack.WebAPI">
+      <Version>1.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="BouncyCastle">
+      <Version>1.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="Braintree">
+      <Version>2.63.0</Version>
+    </PackageReference>
+    <PackageReference Include="Brotli.NET">
+      <Version>2.0.4.2</Version>
+    </PackageReference>
+    <PackageReference Include="DocumentFormat.OpenXml">
+      <Version>2.7.2</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Casino.WebAPI">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Service.Cashout">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Monitoring">
+      <Version>2.0.55.4</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Monitoring.BCL">
+      <Version>2.0.55.4</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Monitoring.BG.Server">
+      <Version>2.0.55.4</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Templating.Service">
+      <Version>2.0.49.1-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Templating.Service.Common">
+      <Version>2.0.49.1-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Extensions.Templating.TWCOM">
+      <Version>2.0.49.1-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AuditLog.BCL">
+      <Version>2.0.24</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.BCL">
+      <Version>2.0.30.4-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Common">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.DAL">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.DALDBSpecific">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Model">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Model.Common">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Repository">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Repository.Common">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service.Amatic">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service.CoinPusher">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service.Common">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service.Evolution">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.Service.NetEnt">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.WebAPI">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.WebAPI.Amatic">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.WebAPI.CoinPusher">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.WebAPI.Evolution">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Casino.WebAPI.NetEnt">
+      <Version>2.0.39.6-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.V1Replication">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.MC.BCL">
+      <Version>2.0.42</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.MessageServer.Extensions.Email">
+      <Version>2.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.BG.BCL">
+      <Version>2.0.56</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.UserActivityTracking.BG.BCL">
+      <Version>2.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.OrgStructureSettingsCompilers">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.BCL.GDP">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.BCL.GDP.WebAPI">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Casino.WebAPI">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service.MC">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service.Report.BCL">
+      <Version>2.0.416-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service.Risk">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.ErrorCodes">
+      <Version>2.0.63</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Integration.Jacktime.Adapter">
+      <Version>1.0.33.3</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Integration.Jacktime.Common">
+      <Version>1.0.33.3</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Integration.Jacktime.Core">
+      <Version>1.0.33.3</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Integration.Jacktime.SDK">
+      <Version>1.0.33.3</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Payment.C2D.Common">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Payment.C2D.Model">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Payment.C2D.Model.Common">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Payment.C2D.Service">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Payment.C2D.Service.Common">
+      <Version>1.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="GP.PaymentService.Integration.BCL">
+      <Version>2.0.7.3-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.PaymentService.Integration.SDK">
+      <Version>2.0.7.3-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Platform.Baasic.Module.WebAPI.Extensions">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Stack.Reporting.WebAPI">
+      <Version>2.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Ical.Net">
+      <Version>2.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="MathNet.Numerics">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Mvc">
+      <Version>5.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.Razor">
+      <Version>3.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client">
+      <Version>2.4.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.SignalR.Core">
+      <Version>2.4.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <Version>2.4.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+      <Version>5.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Extensions.Compression.Server">
+      <Version>2.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Tracing">
+      <Version>5.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
+      <Version>5.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl">
+      <Version>1.1.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.Async">
+      <Version>1.0.168</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.Build">
+      <Version>1.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.EventSource.Redist">
+      <Version>1.1.28</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Cors">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb">
+      <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security">
+      <Version>2.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Tpl.Dataflow">
+      <Version>4.5.24</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.Infrastructure">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MonoSoftware.Core">
+      <Version>1.0.680</Version>
+    </PackageReference>
+    <PackageReference Include="MonoSoftware.DynamicProxy">
+      <Version>1.1.0.100</Version>
+    </PackageReference>
+    <PackageReference Include="NewRelic.LogEnrichers.Log4Net">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Ninject">
+      <Version>3.2.2.6</Version>
+    </PackageReference>
+    <PackageReference Include="Ninject.Extensions.Factory">
+      <Version>3.2.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="Npgsql">
+      <Version>5.0.10</Version>
+    </PackageReference>
+    <PackageReference Include="NReco.PdfGenerator">
+      <Version>1.1.11</Version>
+    </PackageReference>
+    <PackageReference Include="protobuf-net.Core">
+      <Version>3.0.101</Version>
+    </PackageReference>
+    <PackageReference Include="QRCoder">
+      <Version>1.3.6</Version>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle">
+      <Version>5.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Buffers">
+      <Version>4.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.IO.FileSystem.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory">
+      <Version>4.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.Numerics.Vectors">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>4.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading.Channels">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading.Tasks.Dataflow">
+      <Version>4.11.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Threading.Tasks.Extensions">
+      <Version>4.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.BCL">
+      <Version>2.0.492-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.BCL.Model">
+      <Version>2.0.434-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.BCL.Payment">
+      <Version>2.0.447-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Common">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.DAL">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.DALDBSpecific">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Model">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Model.Common">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Repository">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Repository.Common">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Service">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Service.Common">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.Service.Reports">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Core.WebAPI">
+      <Version>2.0.567-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.BCL.Common">
+      <Version>2.0.243-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.BCL.Repository.Common">
+      <Version>2.0.243-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.BCL.Service.Common">
+      <Version>2.0.243-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.BCL.WebAPI.Common">
+      <Version>2.0.243-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.BCL">
+      <Version>2.0.436-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.BCL.Model">
+      <Version>2.0.395-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Common">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.DAL">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.DALDBSpecific">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Model">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Model.Common">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Repository">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Repository.Common">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Service">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Service.Common">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Service.Reports">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Sync">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Sync.Common">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.Sync.OfferManagement">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Event.WebAPI">
+      <Version>2.0.535-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Common">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Model">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Model.Common">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Repository">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Repository.Common">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Service">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.Service.Common">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Platform.IpLocator.WebAPI">
+      <Version>2.0.12</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.BCL">
+      <Version>2.0.171</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Common">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.DAL">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.DALDBSpecific">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Model">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Model.Common">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Repository">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Repository.Common">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Service">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Service.Common">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.Service.Reports">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.RiskManagement.WebAPI">
+      <Version>2.0.185</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.BCL.Model">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Common">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.DAL">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.DALDBSpecific">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Model">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Model.Common">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Repository">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Repository.Common">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Service">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.Service.Common">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Statistic.WebAPI">
+      <Version>2.0.95</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.BCL">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.Common">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.Filters">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.Service">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.Validation.Validators">
+      <Version>2.0.168.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.BCL">
+      <Version>2.0.455-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.BCL.Payment">
+      <Version>2.0.403-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.BCL.Payment.Localization">
+      <Version>2.0.382-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Common">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Core.Service.Extensions">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Core.WebAPI.Extensions">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.DAL">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.DALDBSpecific">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Model">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Model.Common">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Repository">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Repository.Common">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service.Common">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.Service.Reports">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Platform.WebAPI">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Platform.Baasic.Module.Service.Extensions">
+      <Version>2.0.504-dev</Version>
+    </PackageReference>
+    <PackageReference Include="Telerik.Reporting.Cache.StackExchangeRedis.2">
+      <Version>14.0.20.219</Version>
+    </PackageReference>
+    <PackageReference Include="UniversalAnalytics">
+      <Version>1.0.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="VSLangProj">
+      <Version>7.0.3301</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.BCL">
+      <Version>2.0.24</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Common">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.DAL">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.DALDBSpecific">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Model">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Model.Common">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Repository">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Repository.Common">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Service">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.Service.Common">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+    <PackageReference Include="GP.Baasic.Module.AML.WebAPI">
+      <Version>2.0.29.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingMono|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DevMonoZZ|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'QAMonoZZ|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QADomnet|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingMono|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingDomnet|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PreProduction|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PreProduction|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingMono|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DevMonoZZ|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'QAMonoZZ|x64' ">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QADomnet|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingMono|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingDomnet|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMono|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestMono|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TLTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TLTest|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDomnet|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDomnet|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevMonoTW|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevMonoTW|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUG_NO_AUTHENTICATION;DEBUG_NO_CHALLENGESERVICE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QAMonoTW|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QAMonoTW|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\GP.WebAPI.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'==true">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50901</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55555/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties BuildVersion_StartDate="2013/2/22" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_UseGlobalSettings="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <Target Name="PrintTWCompanyNameForPackages" AfterTargets="AfterCompile" Condition="$(IncludeTWSpecificPackages) == 'true'">
+    <Warning Text="Will include TW Company specific packages" />
+  </Target>
+  <Target Name="PrintZZCompanyNameForPackages" AfterTargets="AfterCompile" Condition="$(IncludeZZSpecificPackages) == 'true'">
+    <Warning Text="Will include ZZ Company specific packages" />
+  </Target>
+  <Target Name="PrintOPCompanyNameForPackages" AfterTargets="AfterCompile" Condition="$(IncludeOPSpecificPackages) == 'true'">
+    <Warning Text="Will include OP Company specific packages" />
+  </Target>
+  <Target Name="PrintBTCompanyNameForPackages" AfterTargets="AfterCompile" Condition="$(IncludeBTSpecificPackages) == 'true'">
+    <Warning Text="Will include BT Company specific packages" />
+  </Target>
+  <Target Name="PrintMLCompanyNameForPackages" AfterTargets="AfterCompile" Condition="$(IncludeMLSpecificPackages) == 'true'">
+    <Warning Text="Will include ML Company specific packages" />
+  </Target>
+  <Choose>
+    <When Condition="$(IncludeTWSpecificPackages) == 'true'">
+      <ItemGroup>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Common">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.DAL">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.DALDBSpecific">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Integration">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Model">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Model.Common">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Repository">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Repository.Common">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Service">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.Service.Common">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Oasis.WebAPI">
+          <Version>2.0.59-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.UserValidation.Provider.Oasis">
+          <Version>2.0.33.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.TW">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.TWDE">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.TWAT">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Fiscal.DE.BCL">
+          <Version>2.0.1</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Fiscal.DE.SDK">
+          <Version>2.0.3.1</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Agency.Common">
+          <Version>2.0.114-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Agency.DAL">
+          <Version>2.0.114-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Agency.DALDBSpecific">
+          <Version>2.0.114-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Agency.Service">
+          <Version>2.0.114-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Agency.WebAPI">
+          <Version>2.0.114-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Central.Common">
+          <Version>2.0.25.10-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Central.DAL">
+          <Version>2.0.25.10-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Central.DALDBSpecific">
+          <Version>2.0.25.10-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Central.Service">
+          <Version>2.0.25.10-dev</Version>
+        </PackageReference>
+        <PackageReference Include="TW.Baasic.Module.Central.WebAPI">
+          <Version>2.0.25.10-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Common">
+          <Version>2.0.28</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Sender">
+          <Version>2.0.28</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.Common">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.Repository">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.Repository.Common">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.Service">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.Service.Common">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.WebAPI">
+          <Version>2.0.10.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.BCL">
+          <Version>2.0.0.6-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Client">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Common">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.DAL">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.DALDBSpecific">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Model">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Model.Common">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Repository">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.Service">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.Spec.FCL.TW.Insic.WebAPI">
+          <Version>2.0.9.7-dev</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(IncludeMLSpecificPackages) == 'true'">
+      <ItemGroup>
+        <PackageReference Include="GP.Baasic.Module.ML.BCL">
+          <Version>2.0.16</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ML.Repository">
+          <Version>2.0.16</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ML.Repository.Common">
+          <Version>2.0.16</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ML.Service">
+          <Version>2.0.16</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ML.Service.Common">
+          <Version>2.0.16</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.VB">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Client">
+          <Version>2.0.28</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Common">
+          <Version>2.0.28</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(IncludeZZSpecificPackages) == 'true'">
+      <ItemGroup>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.ZZ">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Client">
+          <Version>2.0.28</Version>
+        </PackageReference>
+        <PackageReference Include="GP.Baasic.Module.ExtensionService.Common">
+          <Version>2.0.28</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(IncludeBTSpecificPackages) == 'true'">
+      <ItemGroup>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.BT">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(IncludeOPSpecificPackages) == 'true'">
+      <ItemGroup>
+        <PackageReference Include="GP.Baasic.Extensions.Templating.OP">
+          <Version>2.0.49.1-dev</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Target Name="PrintMissingCompanyName" AfterTargets="TransformWebConfig" Condition="$(Company) == ''">
+    <Warning Text="No Company Config Transformation will be performed!" />
+  </Target>
+  <Target Name="PrintCompanyName" AfterTargets="TransformWebConfig" Condition="$(Company) != ''">
+    <Warning Text="Company Configuration that will be used for transformation if possible: '$(Company)'" />
+  </Target>
+  <!-- Web.Config transformation after  -->
+  <Target Name="TransformCompanyWebConfig" AfterTargets="TransformWebConfig" Condition="'$(Company)' != '' AND exists('Configuration\$(Configuration)\$(Company)\Web.config')">
+    <!-- Generate transformed Connection Strings config in the intermediate directory -->
+    <Warning Text="Transforming Web Config With Company Specific data. Source file: Configuration\$(Configuration)\$(Company)\Web.config" />
+    <TransformXml Source="$(IntermediateOutputPath)\TransformWebConfig\transformed\Web.config" Destination="$(IntermediateOutputPath)\TransformWebConfig\transformed\Web.config" Transform="Configuration\$(Configuration)\$(Company)\Web.config" />
+  </Target>
+  <!-- AppSettings -->
+  <Target Name="TransformAppSettingsConfig" AfterTargets="PrintCompanyName" Condition="'$(Company)' != '' AND exists('Configuration\$(Configuration)\$(Company)\appSettings.config')">
+    <!-- Generate transformed AppSettings config in the intermediate directory -->
+    <Warning Text="Transforming App Settings With Company Specific data. Source file: Configuration\$(Configuration)\$(Company)\appSettings.config" />
+    <TransformXml Source="Configuration\$(Configuration)\appSettings.config" Destination="Configuration\$(Configuration)\appSettings.config" Transform="Configuration\$(Configuration)\$(Company)\appSettings.config" />
+  </Target>
+  <!-- Connection Strings -->
+  <Target Name="TransformConnectionStringsConfig" AfterTargets="PrintCompanyName" Condition="'$(Company)' != '' AND exists('Configuration\$(Configuration)\$(Company)\connectionStrings.config')">
+    <!-- Generate transformed Connection Strings config in the intermediate directory -->
+    <Warning Text="Transforming Connection strings With Company Specific data. Source file: Configuration\$(Configuration)\$(Company)\connectionStrings.config" />
+    <TransformXml Source="Configuration\$(Configuration)\connectionStrings.config" Destination="Configuration\$(Configuration)\connectionStrings.config" Transform="Configuration\$(Configuration)\$(Company)\connectionStrings.config" />
+  </Target>
+  <!-- smtp.config transformation after  -->
+  <Target Name="TransformSmtpSettingsConfig" AfterTargets="PrintCompanyName" Condition="'$(Company)' != '' AND exists('Configuration\$(Configuration)\$(Company)\smtp.config')">
+    <!-- Generate transformed smtp config in the intermediate directory -->
+    <Warning Text="Transforming SMTP Settings With Company Specific data. Source file: Configuration\$(Configuration)\$(Company)\smtp.config" />
+    <TransformXml Source="Configuration\$(Configuration)\smtp.config" Destination="Configuration\$(Configuration)\smtp.config" Transform="Configuration\$(Configuration)\$(Company)\smtp.config" />
+  </Target>
+</Project>
