@@ -14,8 +14,8 @@ namespace NuGetVersionUpdater
         {
             Console.WriteLine("NuGetCopy Task: ");
 
-            string file1Path = @"C:\Users\Andrej\NugetCopyTask\NugetCopy\GP.WebAPI.csproj";
-            string file2Path = @"C:\Users\Andrej\NugetCopyTask\NugetCopy\GP.Baasic.Module.Neccton.WindowsService.Host2.csproj";
+            string file2Path = @".\GP.WebAPI.csproj";
+            string file1Path = @".\GP.Baasic.Module.Neccton.WindowsService.Host.csproj";
 
             if (!File.Exists(file1Path))
             {
@@ -36,36 +36,41 @@ namespace NuGetVersionUpdater
 
         static void UpdatePackageVersions(string sourceFile, string targetFile)
         {
-            var sourceDoc = XDocument.Load(sourceFile);
-            var targetDoc = XDocument.Load(targetFile);
-
-            //foreach (XElement element in sourceDoc.Descendants("PackageReference"))
-            //{
-            //    Console.WriteLine(element.Element);
-            //}
-
-            //Console.WriteLine(targetDoc);
-            //Console.Writeline(sourceDoc):
-
+            XDocument sourceDoc = XDocument.Load(sourceFile);
+            XDocument targetDoc = XDocument.Load(targetFile);
+            
             XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
-            var sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
+
+            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
+
+            if (!sourcePackages.Any())
+            {
+                sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
+            }
 
             foreach (var package in sourcePackages)
             {
                 var targetPackage = targetDoc.Descendants("PackageReference").FirstOrDefault(p => p.Attribute("Include")?.Value == package.Id);
 
+                if (targetPackage == null)
+                {
+                    targetPackage = targetDoc.Descendants(ns + "PackageReference").FirstOrDefault(p => p.Attribute("Include")?.Value == package.Id);
+                }
+
                 if (targetPackage != null)
                 {
                     var currentVersion = GetPackageVersion(targetPackage);
-                    if (currentVersion != null && currentVersion != package.Version)
+                    if (currentVersion != package.Version)
                     {
                         SetPackageVersion(targetPackage, package.Version);
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"Updated version of package {package.Id} TO ------->> {package.Version}");
+                        Console.ResetColor();
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Package {package.Id} not found in {targetFile}");
+                    Console.WriteLine($"Package {package.Id} NOT FOUND IN TARGETFILE");
                 }
             }
 
@@ -74,29 +79,29 @@ namespace NuGetVersionUpdater
 
         static string GetPackageVersion(XElement packageReference)
         {
-
-            var versionAttribute = packageReference.Attributes()
-                .FirstOrDefault(x => string.Equals(x.Name.LocalName, "version", StringComparison.OrdinalIgnoreCase));
-
-            if (versionAttribute != null)
-            {
-                return versionAttribute.Value;
-            }
-
-            var versionElement = packageReference.Element("Version");
-
+            XElement versionElement = packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version");
             if (versionElement != null)
             {
                 return versionElement.Value;
             }
-
-            return null;
+            else
+            {
+                XAttribute versionAttribute = packageReference.Attribute("Version") ?? packageReference.Attribute("version");
+                if (versionAttribute != null)
+                {
+                    return versionAttribute.Value;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
 
         static void SetPackageVersion(XElement packageReference, string version)
         {
-            var versionElement = packageReference.Element("Version");
+            XElement versionElement = packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version");
             if (versionElement != null)
             {
                 versionElement.Value = version;
