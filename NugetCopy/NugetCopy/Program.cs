@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -40,7 +41,7 @@ namespace NuGetVersionUpdater
             XDocument targetDoc = XDocument.Load(targetFile);
             
             XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
-
+            int counter = 0;
             var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
 
             if (!sourcePackages.Any())
@@ -50,22 +51,26 @@ namespace NuGetVersionUpdater
 
             foreach (var package in sourcePackages)
             {
-                var targetPackage = targetDoc.Descendants("PackageReference").FirstOrDefault(p => p.Attribute("Include")?.Value == package.Id);
+                var targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
 
-                if (targetPackage == null)
+                if (!targetPackages.Any())
                 {
-                    targetPackage = targetDoc.Descendants(ns + "PackageReference").FirstOrDefault(p => p.Attribute("Include")?.Value == package.Id);
+                    targetPackages = targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id);
                 }
-
-                if (targetPackage != null)
+                
+                if (targetPackages.Any())
                 {
-                    var currentVersion = GetPackageVersion(targetPackage);
-                    if (currentVersion != package.Version)
+                    foreach(var targetPackage in targetPackages)
                     {
-                        SetPackageVersion(targetPackage, package.Version);
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"Updated version of package {package.Id} TO ------->> {package.Version}");
-                        Console.ResetColor();
+                        var currentVersion = GetPackageVersion(targetPackage);
+                        if (currentVersion != package.Version)
+                        {
+                            SetPackageVersion(targetPackage, package.Version);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"Updated version of package {package.Id} TO ------->> {package.Version}");
+                            Console.ResetColor();
+                            counter += 1;
+                        }
                     }
                 }
                 else
@@ -74,6 +79,9 @@ namespace NuGetVersionUpdater
                 }
             }
 
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("NUMBER OF UPDATES: {0}", counter);
+            Console.ResetColor();
             targetDoc.Save(targetFile);
         }
 
