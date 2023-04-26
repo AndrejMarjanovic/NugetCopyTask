@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NugetCopy.Service;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.IO;
@@ -15,130 +16,30 @@ namespace NuGetVersionUpdater
         {
             Console.WriteLine("NuGetCopy Task: ");
 
-            string file1Path = @"..\..\..\..\GP.WebAPI.csproj";
-            string file2Path = @"..\..\..\..\GP.Baasic.Module.Neccton.WindowsService.Host.csproj";
+            string sourcePath = @"..\..\..\..\GP.WebAPI.csproj";
 
-            if (!File.Exists(file1Path))
+            if (!File.Exists(sourcePath))
             {
-                Console.WriteLine($"File not found: {file1Path}");
+                Console.WriteLine($"File not found: {sourcePath}");
                 return;
             }
 
-            if (!File.Exists(file2Path))
-            {
-                Console.WriteLine($"File not found: {file2Path}");
-                return;
+            var CsprojFiles = NugetCopyService.GetCsprojFiles(@"..\..\..\..\Solution");
+
+            Console.WriteLine();
+            Console.WriteLine("Total files to update: {0}", CsprojFiles.Count);
+            Console.WriteLine();
+
+            foreach (var targetPath in CsprojFiles)
+            {            
+                Console.WriteLine("Updatig file at path: {0}", targetPath);
+
+                NugetCopyService.UpdatePackageVersions(sourcePath, targetPath);
+
+                Console.WriteLine();
             }
 
-            UpdatePackageVersions(file1Path, file2Path);
-
-            Console.WriteLine("Update complete.");
-        }
-
-        static void UpdatePackageVersions(string sourceFile, string targetFile)
-        {
-            XDocument sourceDoc = XDocument.Load(sourceFile);
-            XDocument targetDoc = XDocument.Load(targetFile);
-            
-            XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
-            int counter = 0;
-            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
-
-            if (!sourcePackages.Any())
-            {
-                sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
-            }
-
-            foreach (var package in sourcePackages)
-            {
-                var targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
-
-                if (!targetPackages.Any())
-                {
-                    targetPackages = targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id);
-                }
-
-                if (targetPackages.Any())
-                {
-                    foreach (var targetPackage in targetPackages)
-                    {
-                        var currentVersion = GetPackageVersion(targetPackage);
-                        if (currentVersion != package.Version)
-                        {
-                            SetPackageVersion(targetPackage, package.Version);
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Updated version of package {package.Id} TO ------->> {package.Version}");
-                            Console.ResetColor();
-                            counter += 1;
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Package {package.Id} NOT FOUND IN TARGETFILE");
-                }
-            }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("NUMBER OF UPDATES: {0}", counter);
-            Console.ResetColor();
-
-            SaveFile(targetDoc, targetFile);
-        }
-
-
-        static void SaveFile(XDocument targetDoc, string path)
-        {
-            var stringEncoding = targetDoc.Declaration?.Encoding;
-
-            if (stringEncoding == null)
-            {
-                XmlWriterSettings xws = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineChars = "\r\n" };
-                using (XmlWriter xw = XmlWriter.Create(path, xws))
-                    targetDoc.Save(xw);
-            }
-            else
-            {
-                targetDoc.Save(path);
-            }
-
-        }
-
-
-        static string GetPackageVersion(XElement packageReference)
-        {
-            XElement versionElement = packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version");
-            if (versionElement != null)
-            {
-                return versionElement.Value;
-            }
-            else
-            {
-                XAttribute versionAttribute = packageReference.Attribute("Version") ?? packageReference.Attribute("version");
-                if (versionAttribute != null)
-                {
-                    return versionAttribute.Value;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
-
-
-        static void SetPackageVersion(XElement packageReference, string version)
-        {
-            XElement versionElement = packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version");
-            if (versionElement != null)
-            {
-                versionElement.Value = version;
-            }
-            else
-            {
-                XAttribute versionAttribute = packageReference.Attribute("Version") ?? packageReference.Attribute("version");
-                versionAttribute.Value = version;
-            }
+            Console.WriteLine("Update of files complete.");
         }
     }
 }

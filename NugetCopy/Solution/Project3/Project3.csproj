@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net471</TargetFramework>
@@ -262,7 +262,7 @@
     </Content>
     <Content Include="App.QAMonoZZ.config">
       <DependentUpon>App.config</DependentUpon>
-    </Content>
+    </Content>	
     <Content Include="App.QADomnet.config">
       <DependentUpon>App.config</DependentUpon>
     </Content>
@@ -270,7 +270,7 @@
       <DependentUpon>App.config</DependentUpon>
     </Content>
     <Content Include="App.DevMonoZZ.config">
-      <DependentUpon>App.config</DependentUpon>
+      <DependentUpon>App.config</DependentUpon>    
     </Content>
     <Content Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
@@ -381,13 +381,13 @@
     <PackageReference Include="GP.Baasic.Extensions.Monitoring" Version="2.0.55.4" />
     <PackageReference Include="GP.Baasic.Extensions.Monitoring.BCL" Version="2.0.55.4" />
     <PackageReference Include="GP.Baasic.Extensions.Monitoring.BG.Client" Version="2.0.55" />
-    <PackageReference Include="GP.Baasic.Extensions.Templating.Service" Version="2.0.49.1-dev" />
-    <PackageReference Include="GP.Baasic.Extensions.Templating.Service.Common" Version="2.0.49.1-dev" />
-    <PackageReference Include="GP.Baasic.Extensions.Templating.TW" Version="2.0.49.1-dev" />
-    <PackageReference Include="GP.Baasic.Extensions.Templating.TWDE" Version="2.0.49.1-dev" />
+    <PackageReference Include="GP.Baasic.Extensions.Templating.Service" Version="2.0.48" />
+    <PackageReference Include="GP.Baasic.Extensions.Templating.Service.Common" Version="2.0.48" />
+    <PackageReference Include="GP.Baasic.Extensions.Templating.TW" Version="2.0.46" />
+    <PackageReference Include="GP.Baasic.Extensions.Templating.TWDE" Version="2.0.46" />
     <PackageReference Include="GP.Baasic.Module.BCL.Host.Console" Version="2.0.193" />
-    <PackageReference Include="GP.Baasic.Platform.Model.Common" Version="2.0.504-dev" />
-    <PackageReference Include="GP.Baasic.Platform.Service" Version="2.0.504-dev" />
+    <PackageReference Include="GP.Baasic.Platform.Model.Common" Version="2.0.502.1" />
+    <PackageReference Include="GP.Baasic.Platform.Service" Version="2.0.502.1" />
     <PackageReference Include="Hangfire.Core" Version="1.7.9" />
     <PackageReference Include="Hangfire.Ninject" Version="1.2.0" />
     <PackageReference Include="Hangfire.Pro" Version="2.2.3" />
@@ -408,7 +408,7 @@
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.10" />
     <PackageReference Include="Ninject" Version="3.2.2.6" />
     <PackageReference Include="Ninject.Extensions.ContextPreservation" Version="3.2.0.1" />
-    <PackageReference Include="Ninject.Extensions.Factory" Version="3.2.1.2" />
+    <PackageReference Include="Ninject.Extensions.Factory" Version="3.2.1.1" />
     <PackageReference Include="Ninject.Extensions.Interception" Version="3.2.2.2" />
     <PackageReference Include="Ninject.Extensions.Interception.MonoProxy" Version="3.2.2" />
     <PackageReference Include="Ninject.Extensions.Logging" Version="3.2.0" />
@@ -440,23 +440,23 @@
     <PackageReference Include="System.Threading.Channels" Version="5.0.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="GP.Baasic.Core.BCL" Version="2.0.492-dev" />
-    <PackageReference Include="GP.Baasic.Core.BCL.Model" Version="2.0.434-dev" />
-    <PackageReference Include="GP.Baasic.Core.BCL.Payment" Version="2.0.447-dev" />
-    <PackageReference Include="GP.Baasic.Core.Common" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.DAL" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.DALDBSpecific" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Model" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Model.Common" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Repository" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Repository.Common" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Service" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Core.Service.Common" Version="2.0.567-dev" />
-    <PackageReference Include="GP.Baasic.Module.BCL.Common" Version="2.0.243-dev" />
-    <PackageReference Include="GP.Baasic.Module.BCL.Repository.Common" Version="2.0.243-dev" />
-    <PackageReference Include="GP.Baasic.Module.BCL.Service.Common" Version="2.0.243-dev" />
-    <PackageReference Include="GP.Baasic.Platform.Repository" Version="2.0.504-dev" />
-    <PackageReference Include="GP.Baasic.Platform.Model.Common" Version="2.0.504-dev" />
+    <PackageReference Include="GP.Baasic.Core.BCL" Version="2.0.490" />
+    <PackageReference Include="GP.Baasic.Core.BCL.Model" Version="2.0.432" />
+    <PackageReference Include="GP.Baasic.Core.BCL.Payment" Version="2.0.445" />
+    <PackageReference Include="GP.Baasic.Core.Common" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.DAL" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.DALDBSpecific" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Model" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Model.Common" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Repository" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Repository.Common" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Service" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Core.Service.Common" Version="2.0.565.1" />
+    <PackageReference Include="GP.Baasic.Module.BCL.Common" Version="2.0.241.1" />
+    <PackageReference Include="GP.Baasic.Module.BCL.Repository.Common" Version="2.0.241.1" />
+    <PackageReference Include="GP.Baasic.Module.BCL.Service.Common" Version="2.0.241.1" />
+    <PackageReference Include="GP.Baasic.Platform.Repository" Version="2.0.502.1" />
+     <PackageReference Include="GP.Baasic.Platform.Model.Common" Version="2.0.502.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GP.Baasic.Module.Neccton.BG.Client\GP.Baasic.Module.Neccton.BG.Client.csproj" />
