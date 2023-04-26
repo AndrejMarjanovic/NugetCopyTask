@@ -14,8 +14,8 @@ namespace NuGetVersionUpdater
         {
             Console.WriteLine("NuGetCopy Task: ");
 
-            string file2Path = @".\GP.WebAPI.csproj";
-            string file1Path = @".\GP.Baasic.Module.Neccton.WindowsService.Host.csproj";
+            string file1Path = @"..\..\..\..\GP.WebAPI.csproj";
+            string file2Path = @"..\..\..\..\GP.Baasic.Module.Neccton.WindowsService.Host.csproj";
 
             if (!File.Exists(file1Path))
             {
