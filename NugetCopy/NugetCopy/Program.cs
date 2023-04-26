@@ -44,8 +44,6 @@ namespace NuGetVersionUpdater
             int counter = 0;
             var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
 
-            Console.WriteLine(targetDoc);
-
             if (!sourcePackages.Any())
             {
                 sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
@@ -85,10 +83,27 @@ namespace NuGetVersionUpdater
             Console.WriteLine("NUMBER OF UPDATES: {0}", counter);
             Console.ResetColor();
 
-            XmlWriterSettings xws = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineChars = "\r\n" };
-            using (XmlWriter xw = XmlWriter.Create(targetFile, xws))
-                targetDoc.Save(xw);
+            SaveFile(targetDoc, targetFile);
         }
+
+
+        static void SaveFile(XDocument targetDoc, string path)
+        {
+            var stringEncoding = targetDoc.Declaration?.Encoding;
+
+            if (stringEncoding == null)
+            {
+                XmlWriterSettings xws = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineChars = "\r\n" };
+                using (XmlWriter xw = XmlWriter.Create(path, xws))
+                    targetDoc.Save(xw);
+            }
+            else
+            {
+                targetDoc.Save(path);
+            }
+
+        }
+
 
         static string GetPackageVersion(XElement packageReference)
         {
