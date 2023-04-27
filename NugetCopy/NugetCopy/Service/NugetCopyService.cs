@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml;
+using NugetCopy.Common;
 
 namespace NugetCopy.Service
 {
@@ -22,15 +23,15 @@ namespace NugetCopy.Service
             return csProjFiles;
         }
 
-        public static void UpdatePackageVersions(string sourceFile, string targetFile)
+        public static void UpdatePackageVersions(string sourceFile, string targetFile, bool packsToUpdate)
         {
             XDocument sourceDoc = XDocument.Load(sourceFile);
             XDocument targetDoc = XDocument.Load(targetFile, LoadOptions.PreserveWhitespace);
 
             XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
             int counter = 0;
-            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
 
+            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
             if (!sourcePackages.Any())
             {
                 sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
@@ -38,11 +39,15 @@ namespace NugetCopy.Service
 
             foreach (var package in sourcePackages)
             {
-                var targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
-
+                IEnumerable<XElement> targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
                 if (!targetPackages.Any())
                 {
                     targetPackages = targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id);
+                }
+
+                if (packsToUpdate)
+                {
+                    targetPackages = FilterPackages(targetPackages);
                 }
 
                 if (targetPackages.Any())
@@ -64,9 +69,18 @@ namespace NugetCopy.Service
 
             Console.WriteLine("NUMBER OF UPDATES: {0}", counter);
 
-            SaveFile(targetDoc, targetFile);
+            if (counter > 0)
+                SaveFile(targetDoc, targetFile);
         }
 
+        static IEnumerable<XElement> FilterPackages (IEnumerable<XElement> elements)
+        {
+            elements = elements.Where(e => e.Attribute("Include").Value.StartsWith("GP.") || 
+                                           e.Attribute("Include").Value.StartsWith("Baasic.") ||
+                                           e.Attribute("Include").Value.StartsWith("MonoSoftware."));
+            
+            return elements;
+        }
 
         static void SaveFile(XDocument targetDoc, string path)
         {

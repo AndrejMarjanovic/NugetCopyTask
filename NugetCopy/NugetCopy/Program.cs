@@ -1,4 +1,5 @@
-﻿using NugetCopy.Service;
+﻿using NugetCopy.Common;
+using NugetCopy.Service;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
@@ -8,7 +9,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace NuGetVersionUpdater
+namespace NugetCopy
 {
     class Program
     {
@@ -30,16 +31,27 @@ namespace NuGetVersionUpdater
             Console.WriteLine("Total files to update: {0}", CsprojFiles.Count);
             Console.WriteLine();
 
+            bool packsToUpdate = PacksToUpdateInput();
+
             foreach (var targetPath in CsprojFiles)
             {            
-                Console.WriteLine("Updatig file at path: {0}", targetPath);
+                Console.WriteLine("Updatig file: {0}", Path.GetFileName(targetPath));
 
-                NugetCopyService.UpdatePackageVersions(sourcePath, targetPath);
+                NugetCopyService.UpdatePackageVersions(sourcePath, targetPath, packsToUpdate);
 
                 Console.WriteLine();
             }
 
             Console.WriteLine("Update of files complete.");
+        }
+
+        private static bool PacksToUpdateInput()
+        {
+            Console.WriteLine("Do you wish to update only packages starting with 'GP.', 'Baasic.' and 'MonoSoftware.'?");
+            Console.Write("If yes type 'true' if not type 'false' to update all packages: ");
+            bool input = Validation.SubmitBool(Console.ReadLine());
+            Console.WriteLine();
+            return input;
         }
     }
 }
