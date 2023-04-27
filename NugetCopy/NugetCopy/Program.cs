@@ -9,7 +9,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace NuGetVersionUpdater
+namespace NugetCopy
 {
     class Program
     {
@@ -35,7 +35,7 @@ namespace NuGetVersionUpdater
 
             foreach (var targetPath in CsprojFiles)
             {            
-                Console.WriteLine("Updatig file at path: {0}", targetPath);
+                Console.WriteLine("Updatig file: {0}", Path.GetFileName(targetPath));
 
                 NugetCopyService.UpdatePackageVersions(sourcePath, targetPath, packsToUpdate);
 

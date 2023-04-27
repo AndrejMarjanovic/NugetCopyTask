@@ -30,8 +30,8 @@ namespace NugetCopy.Service
 
             XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
             int counter = 0;
-            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
 
+            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
             if (!sourcePackages.Any())
             {
                 sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
@@ -40,7 +40,6 @@ namespace NugetCopy.Service
             foreach (var package in sourcePackages)
             {
                 IEnumerable<XElement> targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
-
                 if (!targetPackages.Any())
                 {
                     targetPackages = targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id);
