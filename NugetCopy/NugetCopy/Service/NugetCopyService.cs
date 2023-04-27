@@ -25,7 +25,7 @@ namespace NugetCopy.Service
         public static void UpdatePackageVersions(string sourceFile, string targetFile)
         {
             XDocument sourceDoc = XDocument.Load(sourceFile);
-            XDocument targetDoc = XDocument.Load(targetFile);
+            XDocument targetDoc = XDocument.Load(targetFile, LoadOptions.PreserveWhitespace);
 
             XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
             int counter = 0;
@@ -82,7 +82,6 @@ namespace NugetCopy.Service
             {
                 targetDoc.Save(path);
             }
-
         }
 
 
