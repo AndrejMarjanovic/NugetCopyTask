@@ -54,7 +54,7 @@ namespace NugetCopy.Service
                         {
                             SetPackageVersion(targetPackage, package.Version);
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Updated version of package {package.Id} TO ------->> {package.Version}");
+                            Console.WriteLine($"Updated version of package {package.Id} FROM: {currentVersion} TO ------->> {package.Version}");
                             Console.ResetColor();
                             counter += 1;
                         }
