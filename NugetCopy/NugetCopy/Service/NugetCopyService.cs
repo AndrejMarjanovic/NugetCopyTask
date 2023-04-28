@@ -28,22 +28,17 @@ namespace NugetCopy.Service
             XDocument sourceDoc = XDocument.Load(sourceFile);
             XDocument targetDoc = XDocument.Load(targetFile, LoadOptions.PreserveWhitespace);
 
-            XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
             int counter = 0;
 
-            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
-            if (!sourcePackages.Any())
-            {
-                sourcePackages = sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) });
-            }
+            XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
+
+            var sourcePackages = sourceDoc.Descendants("PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) })
+                         .Concat(sourceDoc.Descendants(ns + "PackageReference").Select(p => new { Id = p.Attribute("Include")?.Value, Version = GetPackageVersion(p) }));
 
             foreach (var package in sourcePackages)
             {
-                IEnumerable<XElement> targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id);
-                if (!targetPackages.Any())
-                {
-                    targetPackages = targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id);
-                }
+                IEnumerable<XElement> targetPackages = targetDoc.Descendants("PackageReference").Where(x => x.Attribute("Include")?.Value == package.Id)
+                                               .Concat(targetDoc.Descendants(ns + "PackageReference").Where(p => p.Attribute("Include")?.Value == package.Id));
 
                 if (packsToUpdate)
                 {
@@ -86,38 +81,16 @@ namespace NugetCopy.Service
         {
             var stringEncoding = targetDoc.Declaration?.Encoding;
 
-            if (stringEncoding == null)
-            {
-                XmlWriterSettings xws = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineChars = "\r\n" };
-                using (XmlWriter xw = XmlWriter.Create(path, xws))
-                    targetDoc.Save(xw);
-            }
-            else
-            {
-                targetDoc.Save(path);
-            }
+            XmlWriterSettings xws = new XmlWriterSettings { OmitXmlDeclaration = true, Indent = true, NewLineChars = "\r\n" };
+            using (XmlWriter xw = XmlWriter.Create(path, stringEncoding == null ? xws : null))
+                targetDoc.Save(xw);
         }
 
 
         static string GetPackageVersion(XElement packageReference)
         {
-            XElement versionElement = packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version");
-            if (versionElement != null)
-            {
-                return versionElement.Value;
-            }
-            else
-            {
-                XAttribute versionAttribute = packageReference.Attribute("Version") ?? packageReference.Attribute("version");
-                if (versionAttribute != null)
-                {
-                    return versionAttribute.Value;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            return packageReference.Descendants().FirstOrDefault(e => e.Name.LocalName == "Version")?.Value
+                   ?? (packageReference.Attribute("Version") ?? packageReference.Attribute("version"))?.Value;
         }
 
         static void SetPackageVersion(XElement packageReference, string version)
